@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Hacker Tabs</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #999;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            font-size: 14px;
+        }
+        .tabs {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            display: inline-block;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .tab.active {
+            border: 1px solid #333;
+            border-bottom: 1px solid #111;
+            background-color: #111;
+            position: relative;
+            top: 1px;
+        }
+        .content {
+            border: 1px solid #333;
+            padding: 10px;
+        }
+        .post {
+            margin-bottom: 20px;
+            border-bottom: 1px dotted #333;
+            padding-bottom: 10px;
+        }
+        .post:last-child {
+            border-bottom: none;
+        }
+        .post-title {
+            color: #bbb;
+            margin-bottom: 5px;
+        }
+        .post-meta {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .post-content {
+            margin-bottom: 10px;
+        }
+        .read-more {
+            color: #666;
+            text-decoration: none;
+        }
+        .read-more:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <span class="tab active" onclick="selectTab('news', this)">NEWS</span>
+        <span class="tab" onclick="selectTab('papers', this)">PAPERS</span>
+        <span class="tab" onclick="selectTab('authors', this)">AUTHORS</span>
+    </div>
+    <div class="content" id="content"></div>
+
+    <script>
+        function selectTab(tabName, clickedTab) {
+            const tabs = document.getElementsByClassName('tab');
+            for (let tab of tabs) {
+                tab.classList.remove('active');
+            }
+            clickedTab.classList.add('active');
+            
+            const content = document.getElementById('content');
+            switch(tabName) {
+                case 'news':
+                    content.innerHTML = `
+                        <div class="post">
+                            <div class="post-title">Major Security Flaw Discovered in Popular IoT Devices</div>
+                            <div class="post-meta">Posted on: 2024-09-01 | By: AnonymousResearcher</div>
+                            <div class="post-content">
+                                A critical vulnerability has been found affecting millions of IoT devices. The flaw allows remote code execution and could potentially be used to create massive botnets. Manufacturers are rushing to release patches.
+                            </div>
+                            <a href="iot_vulnerability.html" class="read-more" target="_blank">Read full article...</a>
+                        </div>
+                        <div class="post">
+                            <div class="post-title">Hacktivists Expose Government Surveillance Program</div>
+                            <div class="post-meta">Posted on: 2024-08-30 | By: DarknetDaily</div>
+                            <div class="post-content">
+                                A group of hacktivists has released documents detailing a covert surveillance operation targeting citizens. The leak has sparked debates about privacy and government overreach.
+                            </div>
+                            <a href="hacktivist_leak.html" class="read-more" target="_blank">Read full article...</a>
+                        </div>
+                    `;
+                    break;
+                case 'papers':
+                    content.innerHTML = `
+                        <div class="post">
+                            <div class="post-title">Novel Approach to Quantum-Resistant Cryptography</div>
+                            <div class="post-meta">Published: 2024-08-28 | Authors: Dr. Alice Quantum, Prof. Bob Cipher</div>
+                            <div class="post-content">
+                                This paper presents a new algorithm for post-quantum cryptography that shows promising results in both security and efficiency. The proposed method utilizes lattice-based structures combined with...
+                            </div>
+                            <a href="quantum_cryptography.html" class="read-more" target="_blank">Read full paper...</a>
+                        </div>
+                        <div class="post">
+                            <div class="post-title">Exploiting Vulnerabilities in 5G Network Protocols</div>
+                            <div class="post-meta">Published: 2024-08-15 | Author: Charlie Exploit</div>
+                            <div class="post-content">
+                                Our research team has identified several critical vulnerabilities in current 5G network protocols. This paper details the discovery process, potential impact, and proposed mitigations for...
+                            </div>
+                            <a href="5g_vulnerabilities.html" class="read-more" target="_blank">Read full paper...</a>
+                        </div>
+                    `;
+                    break;
+                case 'authors':
+                    content.innerHTML = `
+                        <div class="post">
+                            <div class="post-title">Phantom_Hex</div>
+                            <div class="post-meta">Active since: 2015 | Specialization: Reverse Engineering</div>
+                            <div class="post-content">
+                                Phantom_Hex is known for their groundbreaking work in firmware analysis and IoT security. Their recent publications include "Deconstructing Smart Home Ecosystems" and "The Art of Firmware Exploitation".
+                            </div>
+                            <a href="phantom_hex_profile.html" class="read-more" target="_blank">View full profile...</a>
+                        </div>
+                        <div class="post">
+                            <div class="post-title">CryptoNomad</div>
+                            <div class="post-meta">Active since: 2010 | Specialization: Cryptography, Blockchain Security</div>
+                            <div class="post-content">
+                                CryptoNomad has been at the forefront of cryptocurrency security research. Their contributions to identifying vulnerabilities in smart contracts have led to significant improvements in blockchain technology.
+                            </div>
+                            <a href="cryptonomad_profile.html" class="read-more" target="_blank">View full profile...</a>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        // Initialize the page with the news tab selected
+        selectTab('news', document.querySelector('.tab'));
+    </script>
+</body>
+</html>
